@@ -1,7 +1,7 @@
 {
   "name": "countries-information",
   "version": "0.9.0",
-  "description": "Get Country codes, languages, currency codes, emojis, phone codes, search counties and more (case insensitive)",
+  "description": "Get Country codes, languages, currency codes, emojis, phone codes, search countries and more (case insensitive)",
   "homepage": "https://github.com/svenkatreddy/countries-information",
   "bugs": {
     "url": "https://github.com/svenkatreddy/countries-information/issues"
@@ -32,5 +32,6 @@
   "dependencies": {
     "underscore": ">1.4.4",
     "currency-symbol-map": "~2"
-  }
+  },
+  "engines":{"node": ">=4.0"}
 }
