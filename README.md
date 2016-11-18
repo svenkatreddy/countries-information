@@ -1,4 +1,6 @@
 # Countries information 
+
+  [![Build Status](https://travis-ci.org/svenkatreddy/countries-information.svg?branch=master)](https://travis-ci.org/svenkatreddy/countries-information)
   
   Get Country codes, languages, currency codes, emojis, phone codes, search counties and more (case insensitive).
   
