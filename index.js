@@ -10,15 +10,15 @@ var allLanguages = require('./data/languages.json');
 var getSymbol = require('currency-symbol-map');
 
 
-const searchObjectforString = (searchterm, data, property1, property2) => {
-  const searchItem = searchterm.toLowerCase();
-  let found = false;
+var searchObjectforString = function (searchterm, data, property1, property2) {
+  var searchItem = searchterm.toLowerCase();
+  var found = false;
   _.each(data, function (item) {
-    const match1 = item[property1] ? item[property1].toLowerCase() : '';
-    const match2 = item[property2] ? item[property2].toLowerCase() : '';
-    const statusCode = item.status || '';
+    var match1 = item[property1] ? item[property1].toLowerCase() : '';
+    var match2 = item[property2] ? item[property2].toLowerCase() : '';
+    var statusCode = item.status || '';
     
-    if( ((searchItem === match1) || (searchItem === match2)) && statusCode !== "deleted") {
+    if( ((searchItem === match1) || (searchItem === match2)) && statusCode !== 'deleted') {
        found = item;
        return false; 
     }
@@ -37,21 +37,6 @@ _.each(allCurrencies, function (currency) {
   currency.symbol = symbol;
   //exports.currencies[currency.code] = currency;
 });
-
-// Note that for the languages there are several entries with the same alpha3 -
-// eg Dutch and Flemish. Not sure how to best deal with that - here whichever
-// comes last wins.
-_.each(allLanguages, function (language) {
-  //exports.languages[language.alpha2] = language;
-  //exports.languages[language.bibliographic] = language;
-  //exports.languages[language.alpha3] = language;
-});
-
-/*exports.lookup = lookup({
-    countries: allCountries,
-    currencies: allCurrencies,
-    languages: allLanguages
-});*/
 
 var callingCountries = {all: []};
 
@@ -74,7 +59,7 @@ var allCallingCodes = _.reduce(allCountries, function (codes, country) {
 delete callingCountries['']; // remove empty alpha3s
 
 allCallingCodes.sort(function (a, b) {
-  var parse = function (str) { return parseInt(str) };
+  var parse = function (str) { return parseInt(str, 10) };
   var splitA = _.map(a.split(' '), parse);
   var splitB = _.map(b.split(' '), parse);
 
@@ -98,51 +83,51 @@ allCallingCodes.sort(function (a, b) {
   }
 });
 
-const getAllCountries = () => {
+var getAllCountries = function () {
   return allCountries;
 };
 
-const getAllCurrencies = () => {
+var getAllCurrencies = function ()  {
   return allCurrencies;
 };
 
-const getAllLanguages = () => {
+var getAllLanguages = function ()  {
   return allLanguages;
 };
 
-const getAllCallingCodes = () => {
+var getAllCallingCodes = function ()  {
   return allCallingCodes;
 };
 
-const getAllCallingCountries = () => {
+var getAllCallingCountries = function ()  {
   return callingCountries;
 };
 
-const getAllRegions = () => {
+var getAllRegions = function ()  {
   return regions;
 };
 
-const getAllContinents = () => {
+var getAllContinents = function ()  {
   return continents;
 };
 
-const getCountryInfoByCode = (code) => {
+var getCountryInfoByCode = function (code)  {
  return searchObjectforString(code, allCountries, 'alpha2', 'alpha3');
 };
 
-const getCountryInfoByName = (name) => {
+var getCountryInfoByName = function (name) {
  return searchObjectforString(name, allCountries, 'name');
 };
 
-const getCurrencyInfoByCode = (code) => {
+var getCurrencyInfoByCode = function (code)  {
   return searchObjectforString(code, allCurrencies, 'code');
 };
 
-const getLanguageInfoByCode = (code) => {
+var getLanguageInfoByCode = function (code)  {
   return searchObjectforString(code, allLanguages, 'alpha2', 'alpha3');
 };
 
-const getLanguageInfoByBibliographic = (code) => {
+var getLanguageInfoByBibliographic = function (code)  {
   return searchObjectforString(code, allLanguages, 'bibliographic');
 };
 
