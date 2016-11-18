@@ -1,0 +1,36 @@
+{
+  "name": "countries-information",
+  "version": "0.9.0",
+  "description": "Get Country codes, languages, currency codes, emojis, phone codes, search counties and more (case insensitive)",
+  "homepage": "https://github.com/svenkatreddy/countries-information",
+  "bugs": {
+    "url": "https://github.com/svenkatreddy/countries-information/issues"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/svenkatreddy/countries-information"
+  },
+  "keywords": [
+    "countries",
+    "info",
+    "data",
+    "currency",
+    "code"
+  ],
+  "author": "Venkat Reddy",
+  "license": "MIT",
+  "devDependencies": {
+    "canonical-json": "~0.0.4",
+    "csv": "~0.4",
+    "mocha": "~2.2",
+    "chai": ">1.8.1"
+  },
+  "dependencies": {
+    "underscore": ">1.4.4",
+    "currency-symbol-map": "~2"
+  }
+}
