@@ -2,6 +2,8 @@
 
   [![Build Status](https://travis-ci.org/svenkatreddy/countries-information.svg?branch=master)](https://travis-ci.org/svenkatreddy/countries-information)
   
+ [![NPM](https://nodei.co/npm/countries-information.png?stars=true)](https://nodei.co/npm/countries-information/)
+  
   Get Country codes, languages, currency codes, emojis, phone codes, search counties and more (case insensitive).
   
   Goals of this project is to get any country information regardless how you search (case-sensitive, alias, with codes, names or any other param)
