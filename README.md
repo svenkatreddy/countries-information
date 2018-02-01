@@ -230,8 +230,8 @@ These are the steps required:
 
 ``` bash
 # Clone the repo (or better your fork of it)
-git clone https://github.com/OpenBookPrices/country-data.git
-cd country-data
+git clone https://github.com/svenkatreddy/countries-information.git
+cd countries-information
 
 # install the dependencies
 npm install .
