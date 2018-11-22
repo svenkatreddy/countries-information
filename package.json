@@ -25,7 +25,7 @@
   "license": "MIT",
   "devDependencies": {
     "canonical-json": "~0.0.4",
-    "csv": "~0.4",
+    "csv": "~5.0",
     "mocha": "~2.2",
     "chai": ">1.8.1"
   },
