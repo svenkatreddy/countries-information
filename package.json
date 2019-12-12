@@ -16,7 +16,7 @@
   },
   "keywords": [
     "countries",
-    "info", 
+    "info",
     "data",
     "currency",
     "code"
@@ -25,13 +25,15 @@
   "license": "MIT",
   "devDependencies": {
     "canonical-json": "~0.0.4",
+    "chai": ">1.8.1",
     "csv": "~5.3",
-    "mocha": "~2.2",
-    "chai": ">1.8.1"
+    "mocha": "^6.2.2"
   },
   "dependencies": {
     "underscore": ">1.4.4",
     "currency-symbol-map": "~2"
   },
-  "engines":{"node": ">=4.0"}
+  "engines": {
+    "node": ">=4.0"
+  }
 }
