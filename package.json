@@ -1,6 +1,6 @@
 {
   "name": "countries-information",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "Get Country codes, languages, currency codes, emojis, phone codes, search countries and more (case insensitive)",
   "homepage": "https://github.com/svenkatreddy/countries-information",
   "bugs": {
