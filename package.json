@@ -27,7 +27,7 @@
     "canonical-json": "~0.0.4",
     "chai": ">1.8.1",
     "csv": "~5.3",
-    "mocha": "^7.1.1"
+    "mocha": "^8.2.0"
   },
   "dependencies": {
     "underscore": ">1.4.4",
