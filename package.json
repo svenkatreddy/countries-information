@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "underscore": ">1.4.4",
-    "currency-symbol-map": "~4"
+    "currency-symbol-map": "~5"
   },
   "engines": {
     "node": ">=4.0"
