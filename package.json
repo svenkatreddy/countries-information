@@ -26,7 +26,7 @@
   "devDependencies": {
     "canonical-json": "~0.0.4",
     "chai": ">1.8.1",
-    "csv": "~5.3",
+    "csv": "~5.4",
     "mocha": "^7.1.1"
   },
   "dependencies": {
