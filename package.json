@@ -30,7 +30,7 @@
     "mocha": "^7.1.1"
   },
   "dependencies": {
-    "underscore": ">1.4.4",
+    "underscore": "1.12.1",
     "currency-symbol-map": "~4"
   },
   "engines": {
