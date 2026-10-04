@@ -1,5 +1,14 @@
 # Changes
 
+## v0.10.0
+
+  * Modernization: replaced the `underscore` dependency with native JavaScript throughout (`index.js`, tests, data scripts and `data/continents.js`)
+  * Upgraded dev toolchain: mocha 7 -> 12, chai -> 6.x, csv -> 6.x, canonical-json -> 0.4.0; runtime `currency-symbol-map` -> 5.1.0
+  * Node.js >= 20 is now required (CI tests 20/22/24); Travis CI replaced with GitHub Actions; Dependabot enabled
+  * Fixed tests that were silently asserting nothing: the regions suite now uses `getAllRegions()`, and the per-country currency/language checks actually run (they previously iterated `countries.all`, which does not exist)
+  * `currency-symbol-map` 5 now knows the AED (UAE dirham) symbol `د.إ`; the library uses it instead of falling back to the code
+  * The CSV -> JSON data pipeline was rewritten for the current `csv` API and verified to reproduce the committed data files byte-for-byte
+
 ## v0.0.31
 
   * fixed deleted countries appearing in countries[alpha2] instead of the current active country - thanks @silverwind

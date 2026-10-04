@@ -3,55 +3,48 @@
 // Take the csv and convert to json and tidy it up so that it is consistent.
 
 var path = require('path');
-var _ = require('underscore');
-var csv = require('csv');
-var canonicalJSON = require('canonical-json');
 var fs = require('fs');
+var parse = require('csv-parse/sync').parse;
 
-var output = [];
 var countriesFilename = 'countries.csv';
 var deletedCountriesFilename = 'deleted_countries.csv';
 
 
 function readFile(filename) {
-  return new Promise(function (resolve) {
-    var csvFile = path.join( __dirname, filename );
-    var parser = csv.parse({"columns": true});
-
-    parser.on('readable', function () {
-      var record = null;
-      while(record = parser.read()){
-        output.push(record);
-      }
-    });
-
-    parser.on('finish', function(){
-      resolve(output);
-    });
-
-    fs.createReadStream(csvFile).pipe(parser);
-  });
+  var csvFile = path.join(__dirname, filename);
+  return parse(fs.readFileSync(csvFile), { columns: true });
 }
 
-var countriesPromise = readFile(countriesFilename);
-var deletedCountriesPromise = readFile(deletedCountriesFilename);
+function main() {
+  return import('canonical-json').then(function (mod) {
+    var canonicalJSON = mod.default;
 
-Promise.all([countriesPromise, deletedCountriesPromise])
-  .then(function (resulsts){
-    output = _.sortBy(output, function (i) { return i.alpha2;} );
+    var output = readFile(countriesFilename).concat(readFile(deletedCountriesFilename));
+
+    output.sort(function (a, b) {
+      if (a.alpha2 < b.alpha2) { return -1; }
+      if (a.alpha2 > b.alpha2) { return 1; }
+      return 0;
+    });
 
     // strip out fields that are not ready yet
-    _.each(output, function (country) {
+    output.forEach(function (country) {
       delete country.ccTLD;
     });
 
     // change the appropriate fields to be an array
-    _.each(['currencies', 'countryCallingCodes', 'languages'], function(key) {
-      _.each(output, function (country) {
+    ['currencies', 'countryCallingCodes', 'languages'].forEach(function (key) {
+      output.forEach(function (country) {
         country[key] = country[key] ? country[key].split(',') : [];
       });
     });
 
     // print out results to stdout
-    console.log( canonicalJSON( output, null, 2 ));
+    console.log(canonicalJSON(output, null, 2));
   });
+}
+
+main().catch(function (err) {
+  console.error(err);
+  process.exit(1);
+});

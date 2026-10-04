@@ -1,7 +1,6 @@
 'use strict';
 
-var assert     = require('assert'),
-    _          = require('underscore');
+var assert     = require('assert');
 
 var countryInfo = require('..');
 var currencies  = countryInfo.getAllCurrencies();
@@ -11,7 +10,7 @@ describe('currencies', function () {
 
   describe('all', function () {
     it('should be array', function () {
-      assert( _.isArray(currencies) );
+      assert( Array.isArray(currencies) );
     });
   });
 
@@ -23,7 +22,7 @@ describe('currencies', function () {
 
   describe('formatting', function () {
     it("decimals should be numbers", function () {
-      assert(_.isNumber( getCurrencyInfoByCode('USD').decimals));
+      assert(typeof getCurrencyInfoByCode('USD').decimals === 'number');
     });
   });
 
@@ -38,8 +37,8 @@ describe('currencies', function () {
       assert.equal( getCurrencyInfoByCode('ZAR').symbol, 'R');
     });
 
-    it('should find AED (has no symbol)', function () {
-      assert.equal( getCurrencyInfoByCode('AED').symbol, 'AED');
+    it('should find the AED symbol', function () {
+      assert.equal( getCurrencyInfoByCode('AED').symbol, 'د.إ');
     });
 
   });

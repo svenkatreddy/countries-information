@@ -1,12 +1,16 @@
-# Countries information 
+# Countries information
 
-  [![Build Status](https://travis-ci.org/svenkatreddy/countries-information.svg?branch=master)](https://travis-ci.org/svenkatreddy/countries-information)
-  
+  [![CI](https://github.com/svenkatreddy/countries-information/actions/workflows/ci.yml/badge.svg)](https://github.com/svenkatreddy/countries-information/actions/workflows/ci.yml)
+
  [![NPM](https://nodei.co/npm/countries-information.png?stars=true)](https://nodei.co/npm/countries-information/)
-  
+
   Get Country codes, languages, currency codes, emojis, phone codes, search counties and more (case insensitive).
-  
+
   Goals of this project is to get any country information regardless how you search (case-sensitive, alias, with codes, names or any other param)
+
+## Requirements
+
+Node.js >= 20 (`.nvmrc` pins 24).
 
 ## Countries
 
@@ -202,23 +206,22 @@ npm install countries-information
 
 ## Using with webpack
 
-As this code loads the data from JSON files you need to add the JSON loader to webpack:
+JSON imports work out of the box in webpack 5+ (and bundlers like Vite/esbuild)
+— no extra loader configuration needed.
+
+## Developing
 
 ``` bash
-npm install json-loader --save-dev
+# Clone the repo (or better your fork of it)
+git clone https://github.com/svenkatreddy/countries-information.git
+cd countries-information
+
+# install the dependencies (Node >= 20)
+npm install
+
+# Run the tests
+npm test
 ```
-
-and then include in your `webpack.config.js`:
-
-``` javascript
-// ...
-   loaders: [
-      // other loaders
-      { test: /\.json$/, loader: 'json' },
-  ],
-// ...
-```
-
 
 ## How to contribute
 
@@ -243,7 +246,7 @@ open data/countries.csv
 make
 
 # Run the tests
-mocha
+npm test
 
 # If all is ok commit and push
 git add .
