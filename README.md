@@ -209,20 +209,6 @@ npm install countries-information
 JSON imports work out of the box in webpack 5+ (and bundlers like Vite/esbuild)
 — no extra loader configuration needed.
 
-## Developing
-
-``` bash
-# Clone the repo (or better your fork of it)
-git clone https://github.com/svenkatreddy/countries-information.git
-cd countries-information
-
-# install the dependencies (Node >= 20)
-npm install
-
-# Run the tests
-npm test
-```
-
 ## How to contribute
 
 The final format is JSON, but it is easier to work with CSV. Hence in the `data`
@@ -236,8 +222,8 @@ These are the steps required:
 git clone https://github.com/svenkatreddy/countries-information.git
 cd countries-information
 
-# install the dependencies
-npm install .
+# install the dependencies (Node >= 20)
+npm install
 
 # Edit the countries.csv
 open data/countries.csv
