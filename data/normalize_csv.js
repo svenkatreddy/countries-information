@@ -2,46 +2,33 @@
 
 // Take the csv files and convert them to standard format
 
-var path = require('path');
-var _ = require('underscore');
-var csv = require('csv');
-var fs = require('fs');
+var parse = require('csv-parse/sync').parse;
+var stringify = require('csv-stringify/sync').stringify;
 
 var firstHeader = process.argv[2];
 
-
-var output = [];
-
 // read in the CSV
 var input = process.stdin;
+var chunks = [];
 
-
-
-var parser = csv.parse({"columns": true});
-
-
-parser.on('readable', function () {
-  var record = null;
-  while(record = parser.read()){
-     output.push(record);
-  }
+input.on('data', function (chunk) {
+  chunks.push(chunk);
 });
 
-parser.on('finish', function(){
+input.on('end', function () {
+  var output = parse(Buffer.concat(chunks), { columns: true });
 
-  output = _.sortBy(output, function (i) { return i[firstHeader].toLowerCase();} );
+  output.sort(function (a, b) {
+    var x = a[firstHeader].toLowerCase();
+    var y = b[firstHeader].toLowerCase();
+    if (x < y) { return -1; }
+    if (x > y) { return 1; }
+    return 0;
+  });
 
-  var headers = _.keys(output[0]);
-  var remaining = _.without(headers, firstHeader);
-  var columns = _.flatten([firstHeader, remaining.sort()]);
-  // console.warn(columns);
+  var headers = Object.keys(output[0]);
+  var remaining = headers.filter(function (header) { return header !== firstHeader; });
+  var columns = [firstHeader].concat(remaining.sort());
 
-  csv.stringify(
-    output,
-    { "header":true, "columns": columns },
-    function(err, string){ process.stdout.write(string) }
-  );
-
+  process.stdout.write(stringify(output, { header: true, columns: columns }));
 });
-
-input.pipe(parser);

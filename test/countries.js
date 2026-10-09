@@ -3,15 +3,16 @@ var countryInfo = require('..');
 var countries  = countryInfo.getAllCountries();
 var getCountryInfoByCode = countryInfo.getCountryInfoByCode;
 var getCountryInfoByName = countryInfo.getCountryInfoByName;
+var getCurrencyInfoByCode = countryInfo.getCurrencyInfoByCode;
+var getLanguageInfoByCode = countryInfo.getLanguageInfoByCode;
 
 var  assert = require('assert');
-var _ = require('underscore');
 
 describe('countries', function () {
 
   describe('all', function () {
     it('should be array', function () {
-      assert( _.isArray(countries) );
+      assert( Array.isArray(countries) );
     });
   });
 
@@ -32,7 +33,7 @@ describe('countries', function () {
       assert.deepEqual( getCountryInfoByCode('FRA').currencies, ['EUR']);
     });
   });
-  
+
   describe('case insenetive alpha2', function () {
     it('should find USA', function () {
       assert.equal( getCountryInfoByCode('Be').name, 'Belgium');
@@ -50,7 +51,7 @@ describe('countries', function () {
       assert.deepEqual( getCountryInfoByCode('fRA').currencies, ['EUR']);
     });
   });
-  
+
   describe('search by country name', function () {
     it('should find France', function () {
       assert.equal( getCountryInfoByName('france').alpha2, 'FR');
@@ -59,7 +60,7 @@ describe('countries', function () {
   });
 
   describe('check each country has correct form', function () {
-    _.each( countries, function (country) {
+    countries.forEach(function (country) {
       describe(country.name, function () {
         it('should have a status', function () {
           assert( country.status );
@@ -75,11 +76,11 @@ describe('countries', function () {
   });
 
   describe('check currencies for each country', function () {
-    _.each( countries.all, function (country) {
+    countries.forEach(function (country) {
       describe(country.alpha2, function () {
-        _.each( country.currencies, function (currency) {
+        country.currencies.forEach(function (currency) {
           it(currency, function () {
-            assert( currencies[currency] );
+            assert( getCurrencyInfoByCode(currency), 'unknown currency ' + currency + ' for ' + country.alpha2 );
           });
         });
       });
@@ -99,11 +100,11 @@ describe('countries', function () {
   });
 
   describe('check languages for each country', function () {
-    _.each( countries.all, function (country) {
+    countries.forEach(function (country) {
       describe(country.alpha2, function () {
-        _.each( country.languages, function (language) {
+        country.languages.forEach(function (language) {
           it(language, function () {
-            assert( languages[language] );
+            assert( getLanguageInfoByCode(language), 'unknown language ' + language + ' for ' + country.alpha2 );
           });
         });
       });

@@ -2,15 +2,13 @@ var countryInfo = require('..'),
     languages  = countryInfo.getAllLanguages(),
     getLanguageInfoByCode = countryInfo.getLanguageInfoByCode,
     getLanguageInfoByBibliographic = countryInfo.getLanguageInfoByBibliographic,
-    currencies = require('..').currencies,
-    assert     = require('assert'),
-    _          = require('underscore');
+    assert     = require('assert');
 
 describe('languages', function () {
 
   describe('all', function () {
     it('should be array', function () {
-      assert( _.isArray(languages) );
+      assert( Array.isArray(languages) );
     });
   });
 

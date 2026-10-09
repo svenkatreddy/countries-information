@@ -3,35 +3,30 @@
 // Take the csv and convert to json and tidy it up so that it is consistent.
 
 var path = require('path');
-var _ = require('underscore');
-var csv = require('csv');
-var canonicalJSON = require('canonical-json');
 var fs = require('fs');
+var parse = require('csv-parse/sync').parse;
 
-var output = [];
+function main() {
+  return import('canonical-json').then(function (mod) {
+    var canonicalJSON = mod.default;
 
-// read in the CSV
-var csvFile = path.join( __dirname, 'languages.csv' );
-var input = fs.createReadStream(csvFile);
+    // read in the CSV
+    var csvFile = path.join(__dirname, 'languages.csv');
+    var output = parse(fs.readFileSync(csvFile), { columns: true });
 
+    // sort by alpha3
+    output.sort(function (a, b) {
+      if (a.alpha3 < b.alpha3) { return -1; }
+      if (a.alpha3 > b.alpha3) { return 1; }
+      return 0;
+    });
 
-var parser = csv.parse({"columns": true});
+    // print out results to stdout
+    console.log(canonicalJSON(output, null, 2));
+  });
+}
 
-parser.on('readable', function () {
-  var record = null;
-  while(record = parser.read()){
-     output.push(record);
-  }
+main().catch(function (err) {
+  console.error(err);
+  process.exit(1);
 });
-
-parser.on('finish', function(){
-
-  // sort by alpha3
-  output = _.sortBy(output, function (i) { return i.alpha3;} );
-
-  // print out results to stdout
-  console.log( canonicalJSON( output, null, 2 ));
-});
-
-
-input.pipe(parser);

@@ -2,17 +2,16 @@ var callingCodesInfo = require('..'),
     callingCodes = callingCodesInfo.getAllCallingCodes(),
     countries    = require('..').getAllCountries(),
     callingCountries = require('..').getAllCallingCountries(),
-    assert       = require('assert'),
-    _            = require('underscore');
+    assert       = require('assert');
 
 describe('calling codes', function () {
 
   describe('list of all calling codes', function () {
-    _.each(countries, function (country) {
+    countries.forEach(function (country) {
       if (country.countryCallingCodes && country.countryCallingCodes.length) {
         it('should contain codes for ' + country.name, function () {
           assert(
-            _.every(country.countryCallingCodes, function (code) {
+            country.countryCallingCodes.every(function (code) {
               return callingCodes.indexOf(code) > -1
             })
           )
@@ -24,7 +23,6 @@ describe('calling codes', function () {
   describe('callingCountries', function () {
 
     // console.log(callingCountries);
-
     it('should contain countries with calling codes', function () {
       assert( callingCountries.BE );
     });
